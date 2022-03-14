@@ -1,7 +1,8 @@
 import { auth, signIn } from '../lib/firebase'
 import { useContext, useState } from "react";
 import { UserContext } from "../lib/context";
-
+import { firestore } from '../lib/firebase';
+import { doc, collection } from "firebase/firestore";
 const Enter = (props) => {
 
 const {user, username} = useContext(UserContext)
@@ -37,14 +38,24 @@ export default Enter
   
   function UsernameForm() {
 
-    const [formValue, setFormValue] = useState('');
+    const [formValue, setFormValue] = useState('Heeee');
     const [isValid, setIsValid] = useState(false);
     const [loading, setLoading] = useState(false);
   
     const { user, username } = useContext(UserContext);
 
 
-    return null;
+      const onSubmit = async (e) => {
+        e.preventDefault();
+        
+        // Create refs for both documents
+        const userDoc = doc(firestore, `users/${user.uid}`);
+        const usernameDoc = doc(firestore, `usernames/${formValue}`);
+        
+        console.log(userDoc,'USER', usernameDoc,'USERNAME')
+
+      }
+    return <h1 onClick={onSubmit}>Heee</h1>;
   }
   
 

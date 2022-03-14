@@ -5,8 +5,9 @@ import { UserContext } from '../lib/context'
 import { useUserData } from '../lib/hooks'
 import { useEffect } from 'react/cjs/react.production.min'
 
+
 function MyApp({ Component, pageProps }) {
-  
+
 const userData = useUserData()
 
   return (  

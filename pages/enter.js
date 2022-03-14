@@ -1,5 +1,5 @@
 import { auth, signIn } from '../lib/firebase'
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../lib/context";
 
 const Enter = (props) => {
@@ -36,6 +36,14 @@ export default Enter
   }
   
   function UsernameForm() {
+
+    const [formValue, setFormValue] = useState('');
+    const [isValid, setIsValid] = useState(false);
+    const [loading, setLoading] = useState(false);
+  
+    const { user, username } = useContext(UserContext);
+
+
     return null;
   }
   

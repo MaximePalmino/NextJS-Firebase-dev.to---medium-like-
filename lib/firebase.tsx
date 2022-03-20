@@ -4,7 +4,17 @@ import { getFirestore, collection} from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+
+interface Api {
+  apiKey: string,
+  authDomain: string,
+  projectId: string,
+  storageBucket: string,
+  messagingSenderId: string,
+  appId: string,
+}
+
+const firebaseConfig: Api = {
     apiKey: "AIzaSyAsboqu96mBYaYGPf_yLdDcsmPGca8gGlk",
     authDomain: "fireblogs-6094c.firebaseapp.com",
     projectId: "fireblogs-6094c",

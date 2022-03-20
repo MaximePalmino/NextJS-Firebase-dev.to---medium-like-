@@ -5,11 +5,11 @@ import { UserContext } from "../lib/context";
 
 const Navbar: React.FC = ({}) => {
 
-const {name, username} = useContext(UserContext)
+const {user, username} = useContext(UserContext)
 
-useEffect(() => {
-  console.log(name, username)
-})
+
+
+
 
         return (
 

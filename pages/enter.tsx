@@ -8,7 +8,10 @@ import { signInHandler, signOutHandler } from "../lib/auth";
 const Enter: React.FC = ({}) => {
 
 
+
+
     function SignInButton() {
+
         return (
           <button className="btn-google" onClick={signInHandler} >
             <img src={'/google.png'} /> Sign in with Google
@@ -18,14 +21,14 @@ const Enter: React.FC = ({}) => {
 
 
     function SignOutButton() {
+
+
         return (
           <button className="btn-google" onClick={signOutHandler}>
             <img src={'/google.png'} /> Sign OUT with Google
           </button>
         );
       }
-
-
     return (
         <>
             <h1>Hello from Enter</h1>

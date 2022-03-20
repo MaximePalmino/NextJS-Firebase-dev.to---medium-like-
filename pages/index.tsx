@@ -1,15 +1,11 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import Loader from '../components/Loader'
-import toast from 'react-hot-toast'
+import Feed from "../components/Feed"
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
     <div>
-     <button onClick={() => toast.success('hello toast!')}>
-        Toast Me
-     </button>
+      <Feed />
     </div>
   )
 }
+
+export default Home

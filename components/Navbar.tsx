@@ -1,7 +1,15 @@
 import Link from "next/link";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../lib/context";
+
 
 const Navbar: React.FC = ({}) => {
 
+const {name, username} = useContext(UserContext)
+
+useEffect(() => {
+  console.log(name, username)
+})
 
         return (
 

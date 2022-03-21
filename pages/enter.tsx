@@ -20,6 +20,7 @@ const Enter: React.FC = ({}) => {
           <main>
             {/* <Metatags title="Enter" description="Sign up for this amazing app!" /> */}
             {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
+            <SignOutButton/>
           </main>
         </>
     )
@@ -49,19 +50,21 @@ function SignOutButton() {
 
 // Username form
 
-interface UsernameForm {
+interface UsernameMessageProps {
 
   username: string,
   isValid: boolean,
   loading: boolean
 
 }
+
 function UsernameForm() {
-  const [formValue, setFormValue] = useState('');
-  const [isValid, setIsValid] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [formValue, setFormValue] = useState<string>('');
+  const [isValid, setIsValid] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { user, username } = useContext(UserContext);
+
   return (
     !username && (
       <section>
@@ -86,7 +89,7 @@ function UsernameForm() {
   );
 }
 
-function UsernameMessage({ username, isValid, loading }: UsernameForm) {
+function UsernameMessage({ username, isValid, loading }: UsernameMessageProps) {
   if (loading) {
     return <p>Checking...</p>;
   } else if (isValid) {

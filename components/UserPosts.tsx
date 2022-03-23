@@ -1,6 +1,8 @@
 
 
+
 const UserPosts : React.FC = () => {
+
 
     return (
         <>

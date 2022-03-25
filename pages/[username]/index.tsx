@@ -3,6 +3,9 @@ import UserPosts from "../../components/UserPosts"
 
 const UserProfilPage : React.FC = () => {
 
+
+
+
     return(
         <>
         <UserProfil />

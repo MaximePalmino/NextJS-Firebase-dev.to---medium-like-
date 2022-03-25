@@ -10,6 +10,7 @@ const useUserData = () => {
 
     const [user] = useAuthState(auth);
     const [username, setUsername] = useState<string | null>(null);
+    
   useEffect(() => {
     // turn off realtime subscription
     

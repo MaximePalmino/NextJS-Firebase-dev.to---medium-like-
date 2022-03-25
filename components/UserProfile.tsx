@@ -4,31 +4,32 @@ import { UserContext } from '../lib/context';
 import { useContext, useEffect, useState } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../lib/firebase";
+import { getUserWithUsername } from "../lib/firebase";
+import { userProps } from "../pages/[username]";
+
+interface Props {
+
+    user: any,
+    username: userProps,
+}
 
 
-
-
-const UserProfil : React.FC = () => {
-
-  
-    const { user, username } = useContext(UserContext)
-
+const UserProfil : React.FC<Props> = ({ user, username}: any) => {
 
 
     return (
-        <>
-            <div className="box-center">
-            <img src={user.photoURL || '/hacker.png'} className="card-img-center" />
+       <>
+            {/* <div className="box-center">
+            <img src={user.photoURL} className="card-img-center" />
             <p>
-                <i>{user.username}</i>
+            <i>{username}</i>
             </p>
             <h1>{user.displayName || 'Anonymous User'}</h1>
-            </div>
+            </div> */}
 
         </>
     )
-}
+    }
 
 export default UserProfil
-
 

@@ -1,6 +1,6 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection} from 'firebase/firestore'
+import { getFirestore, collection, where} from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
 
 // Your web app's Firebase configuration
@@ -33,3 +33,27 @@ export const provider = new GoogleAuthProvider()
 export const firestore = getFirestore()
 export const storage = getStorage(app)
 
+
+
+/**`
+ * Gets a users/{uid} document with username
+ * @param  {string} username
+ */
+ export async function getUserWithUsername(username) {
+  const usersRef = collection(firestore, 'users');
+  console.log(usersRef)
+}
+
+/**`
+ * Converts a firestore document to JSON
+ * @param  {DocumentSnapshot} doc
+ */
+export function postToJSON(doc) {
+  const data = doc.data();
+  return {
+    ...data,
+    // Gotcha! firestore timestamp NOT serializable to JSON. Must convert to milliseconds
+    createdAt: data.createdAt.toMillis(),
+    updatedAt: data.updatedAt.toMillis(),
+  };
+}

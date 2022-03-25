@@ -6,22 +6,21 @@ import { useEffect, useState } from 'react';
 
 
 
-
-
 const UserPosts : React.FC = () => {
 
     const [tests, setTest] = useState<string>()
+    const test = async () => {
+        const querySnapshot = await getDocs(collection(firestore, "users"));
+        querySnapshot.forEach((doc) => {
+            setTest(doc.id)
+            // console.log(doc.id, " => ", doc.data());
+        });
+    }
 
     useEffect(() => {
-        const test = async () => {
-            const querySnapshot = await getDocs(collection(firestore, "users"));
-            querySnapshot.forEach((doc) => {
-                setTest(doc.id)
-                // console.log(doc.id, " => ", doc.data());
-            });
-        }
+
         test()
-    })
+    }, [setTest])
 
     return (
         <>

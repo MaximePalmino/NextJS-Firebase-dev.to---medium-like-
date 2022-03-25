@@ -1,31 +1,53 @@
-import { collection, doc, setDoc , getDoc} from "firebase/firestore"; 
+import { collection, doc, setDoc , getDocs} from "firebase/firestore"; 
 import { firestore } from "../lib/firebase";
-import { UserContext } from '../lib/context';
-import { useContext, useEffect, useState } from 'react';
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../lib/firebase";
-import { getUserWithUsername } from "../lib/firebase";
-import { userProps } from "../pages/[username]";
+import {  useEffect, useState } from 'react';
 
-interface Props {
 
-    user: any,
-    username: userProps,
+interface UserData {
+    photoURL: string,
+    username: string,
+    displayName: string,
 }
 
+const UserProfil : React.FC = () => {
 
-const UserProfil : React.FC<Props> = ({ user, username}: any) => {
+
+    const [userData, setUserData] = useState<UserData>({
+        photoURL: '',
+        username: '',
+        displayName: '',
+    })
+
+    const fetchPhoto = async () => {
+        const querySnapshot = await getDocs(collection(firestore, "users"));
+        querySnapshot.forEach((doc) => {
+            if(doc.data().photoURL){
+                setUserData({
+                    photoURL: doc.data().photoURL,
+                    username: doc.data().username,
+                    displayName: doc.data().displayName
+                })
+            }
+        });    
+    }
+
+    useEffect(() => {
+ 
+        fetchPhoto()
+
+    }, [setUserData])
+
 
 
     return (
        <>
-            {/* <div className="box-center">
-            <img src={user.photoURL} className="card-img-center" />
+            <div className="box-center">
+            <img src={userData.photoURL} className="card-img-center" />
             <p>
-            <i>{username}</i>
+            <i>{userData.username}</i>
             </p>
-            <h1>{user.displayName || 'Anonymous User'}</h1>
-            </div> */}
+            <h1>{userData.displayName}</h1>
+            </div>
 
         </>
     )

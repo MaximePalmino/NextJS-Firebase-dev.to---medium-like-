@@ -14,12 +14,11 @@ username: string,
 
 const UserProfilPage : React.FC = () => {
 
-    const { user, username } = useContext<any>(UserContext)
 
 
     return(
         <>
-        <UserProfil user={user} username={username}  />
+        <UserProfil   />
         <UserPosts />
         </>
     )

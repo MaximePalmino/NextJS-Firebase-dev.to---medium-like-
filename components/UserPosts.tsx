@@ -6,14 +6,16 @@ import { useEffect, useState } from 'react';
 
 
 
-const UserPosts : React.FC = ({postw}: any) => {
+interface Prop {
+    postw: string
+}
+const UserPosts : React.FC<Prop>= ({postw}) => {
 
 
 
     return (
         <>
-            <h1>{postw}</h1>
-             <h1>Hi from Posts</h1>
+             <h1>{postw}</h1>
         </>
     )
 }

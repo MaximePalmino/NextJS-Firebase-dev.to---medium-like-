@@ -12,20 +12,23 @@ import { firestore } from '../../lib/firebase';
 // }
 
 
+
+interface Post {
+    postw: string,
+}
 const UserProfilPage : React.FC = () => {
 
 
-    const [post, setPost] = useState<any>([])
+    const [post, setPost] = useState([])
 
     const test = async () => {
-        
+
         const querySnapshot = await getDocs(collection(firestore, "users"));
         const postData =  []
         querySnapshot.forEach((doc) => {
             postData.push({title: doc.id})
             console.log(postData,'POOOOOOOST')
             setPost(postData)
-            console.log(post, "SETPOST");
 
         });
 
@@ -34,6 +37,8 @@ const UserProfilPage : React.FC = () => {
     useEffect(() => {
 
         test()
+        console.log(post, "SETPOST");
+
     }, [setPost])
 
 
@@ -41,11 +46,11 @@ const UserProfilPage : React.FC = () => {
     return(
         <>
         <UserProfil   />
-        {/* {post.map((posts) => (
-         <UserPosts postw={posts.id} />
+        {post.map((posts) => (
+         <UserPosts postw={posts.title} />
 
 
-        ))} */}
+        ))}
         </>
     )
 }

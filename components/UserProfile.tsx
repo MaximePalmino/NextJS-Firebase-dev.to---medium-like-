@@ -1,5 +1,5 @@
 import { collection, doc, setDoc , getDocs} from "firebase/firestore"; 
-import { firestore } from "../lib/firebase";
+import { auth, firestore } from "../lib/firebase";
 import {  useEffect, useState } from 'react';
 
 
@@ -21,7 +21,7 @@ const UserProfil : React.FC = () => {
     const fetchPhoto = async () => {
         const querySnapshot = await getDocs(collection(firestore, "users"));
         querySnapshot.forEach((doc) => {
-            if(doc.data().photoURL){
+            if (doc.id == auth.currentUser.uid) {
                 setUserData({
                     photoURL: doc.data().photoURL,
                     username: doc.data().username,

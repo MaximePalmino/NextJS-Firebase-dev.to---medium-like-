@@ -9,10 +9,8 @@ import { firestore, auth  } from '../../lib/firebase';
 const UserProfilPage : React.FC = () => {
 
     const [post, setPost] = useState([])
-    // const [userUid, setUserUid] = useState<string>()
 
     const test = async () => {
-        if (auth.currentUser) {
             const getPosts = await getDocs(collection(firestore, 'users', auth.currentUser.uid, 'posts'))
             const postData =  []
             getPosts.forEach((doc) => {
@@ -22,7 +20,7 @@ const UserProfilPage : React.FC = () => {
                 })
             })
             setPost(postData)
-            } 
+            
         }
 
     useEffect(() => {

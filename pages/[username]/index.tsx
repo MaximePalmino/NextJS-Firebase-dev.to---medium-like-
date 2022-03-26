@@ -6,16 +6,7 @@ import { query, collection, where, getDocs, limit, orderBy, getFirestore, doc } 
 import { firestore } from '../../lib/firebase';
 
 
-// interface Post {
-//     title: string,
-//     content: string,
-// }
 
-
-
-interface Post {
-    postw: string,
-}
 const UserProfilPage : React.FC = () => {
 
 
@@ -27,11 +18,8 @@ const UserProfilPage : React.FC = () => {
         const postData =  []
         querySnapshot.forEach((doc) => {
             postData.push({title: doc.id})
-            console.log(postData,'POOOOOOOST')
-            setPost(postData)
-
         });
-
+        setPost(postData)
         }
 
     useEffect(() => {
@@ -47,7 +35,7 @@ const UserProfilPage : React.FC = () => {
         <>
         <UserProfil   />
         {post.map((posts) => (
-         <UserPosts postw={posts.title} />
+         <UserPosts postw={posts.title} key={Math.random()} />
 
 
         ))}

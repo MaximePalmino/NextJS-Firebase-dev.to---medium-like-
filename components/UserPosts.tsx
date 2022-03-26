@@ -1,21 +1,22 @@
 
-import { getUserWithUsername, postToJSON, firestore } from '../lib/firebase';
+import { getUserWithUsername, postToJSON, firestore} from '../lib/firebase';
 import { query, collection, where, getDocs, limit, orderBy, getFirestore, doc } from 'firebase/firestore';
 import UserProfile from '../components/UserProfile';
 import { useEffect, useState } from 'react';
 
 
-
 interface Prop {
-    postw: string
+    title: string,
+    content: string
 }
-const UserPosts : React.FC<Prop>= ({postw}) => {
+const UserPosts : React.FC<Prop>= ({title, content}) => {
 
 
 
     return (
         <>
-             <h1>{postw}</h1>
+             <h1>{title}</h1>
+             <h1>{content}</h1>
         </>
     )
 }

@@ -1,22 +1,27 @@
 
-import { getUserWithUsername, postToJSON, firestore} from '../lib/firebase';
-import { query, collection, where, getDocs, limit, orderBy, getFirestore, doc } from 'firebase/firestore';
-import UserProfile from '../components/UserProfile';
-import { useEffect, useState } from 'react';
+import Link from 'next/link';
+
 
 
 interface Prop {
     title: string,
-    content: string
+    content: string,
+    id: string
 }
-const UserPosts : React.FC<Prop>= ({title, content}) => {
-
+const UserPosts : React.FC<Prop>= ({title, content, id}) => {
 
 
     return (
         <>
-             <h1>{title}</h1>
-             <h1>{content}</h1>
+            <div className="box-center">
+                <div className="card">
+                    <h1>{title}</h1>
+                    <p>{content}</p>
+                    <Link href={`admin/singlePost?post=${id}`}>
+                    <button>See the post</button>
+                    </Link>
+                </div>
+            </div>
         </>
     )
 }

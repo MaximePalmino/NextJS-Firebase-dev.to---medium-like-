@@ -10,13 +10,14 @@ const UserProfilPage : React.FC = () => {
 
     const [post, setPost] = useState([])
 
-    const test = async () => {
+    const getAllUserPosts = async () => {
             const getPosts = await getDocs(collection(firestore, 'users', auth.currentUser.uid, 'posts'))
             const postData =  []
             getPosts.forEach((doc) => {
                 postData.push({
                     title: doc.data().title,
-                    content: doc.data().content
+                    content: doc.data().content,
+                    id: doc.id
                 })
             })
             setPost(postData)
@@ -26,8 +27,8 @@ const UserProfilPage : React.FC = () => {
     useEffect(() => {
 
         setTimeout(() => {
-            test()
-        }, 1000)
+            getAllUserPosts()
+        }, 600)
 
     }, [])
 
@@ -37,7 +38,7 @@ const UserProfilPage : React.FC = () => {
         <>
             <UserProfil />
             {post.map((posts) => (
-            <UserPosts title={posts.title} content={posts.content}  key={Math.random()} />
+            <UserPosts title={posts.title} content={posts.content}  key={Math.random()} id={posts.id} />
             ))}
         </>
     )

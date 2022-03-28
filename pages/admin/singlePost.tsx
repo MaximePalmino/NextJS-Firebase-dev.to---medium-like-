@@ -2,11 +2,16 @@
 import UserProfil from "../../components/UserProfile"
 import UserPosts from "../../components/UserPosts"
 import { useEffect, useState } from 'react';
-import {  collection, getDocs,getDoc, doc, deleteDoc} from 'firebase/firestore';
+import {  collection, getDocs,getDoc, doc, deleteDoc, updateDoc} from 'firebase/firestore';
 import { firestore, auth  } from '../../lib/firebase';
 import { useRouter } from "next/router";
 
+
+
+
+
 const singlePost: React.FC = () => {
+
 
     const router = useRouter()
     const id = router.query.post
@@ -42,9 +47,24 @@ const singlePost: React.FC = () => {
         }, 500)
     }, [router])
 
+const setTitleHandler = (e) => {
+    setTitle(e.target.value)
+}
+const setContentHandler = (e) => {
+    setContent(e.target.value)
+}
+const sendFormHandler = async (e) => {
+    e.preventDefault()
+    const washingtonRef = doc(firestore, "users", auth.currentUser.uid, "posts", isID);
+    console.log(washingtonRef)
 
+        await updateDoc(washingtonRef, {
+        title: title,
+        content: content
+        });
+    setIsValid(!isValid)
 
-
+}
     return(
         <>
         <div className="box-center">
@@ -52,10 +72,11 @@ const singlePost: React.FC = () => {
             {isValid && (
                     <>
                     <form>
-                        <button onClick={(() => {setIsValid(!isValid)})}>Confirm</button>
+                        <button onClick={sendFormHandler}>Confirm</button>
                         <button onClick={(() => {setIsValid(!isValid)})}>Cancel</button>
-                        <input value={title}></input>
-                        <input value={content}></input>
+                        <input onChange={setTitleHandler}></input>
+                        <input onChange={setContentHandler}></input>
+                        
                     </form>
                     
                     </>

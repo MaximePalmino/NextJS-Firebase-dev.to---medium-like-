@@ -1,8 +1,5 @@
-
-import UserProfil from "../../components/UserProfile"
-import UserPosts from "../../components/UserPosts"
 import { useEffect, useState } from 'react';
-import {  collection, getDocs,getDoc, doc, deleteDoc, updateDoc} from 'firebase/firestore';
+import {  collection, getDocs, doc, deleteDoc, updateDoc} from 'firebase/firestore';
 import { firestore, auth  } from '../../lib/firebase';
 import { useRouter } from "next/router";
 
@@ -39,7 +36,6 @@ const singlePost: React.FC = () => {
         }, 1000)
     }
 
-
     useEffect(() => {
         setTimeout(() => { 
             console.log(id)
@@ -47,24 +43,23 @@ const singlePost: React.FC = () => {
         }, 500)
     }, [router])
 
-const setTitleHandler = (e) => {
-    setTitle(e.target.value)
-}
-const setContentHandler = (e) => {
-    setContent(e.target.value)
-}
-const sendFormHandler = async (e) => {
-    e.preventDefault()
-    const washingtonRef = doc(firestore, "users", auth.currentUser.uid, "posts", isID);
-    console.log(washingtonRef)
 
-        await updateDoc(washingtonRef, {
-        title: title,
-        content: content
-        });
-    setIsValid(!isValid)
+    const setTitleHandler = (e) => {
+        setTitle(e.target.value)
+    }
+    const setContentHandler = (e) => {
+        setContent(e.target.value)
+    }
+    const sendFormHandler = async (e) => {
+        e.preventDefault()
+        const washingtonRef = doc(firestore, "users", auth.currentUser.uid, "posts", isID);
+            await updateDoc(washingtonRef, {
+            title: title,
+            content: content
+            });
+        setIsValid(!isValid)
+    }
 
-}
     return(
         <>
         <div className="box-center">
@@ -74,8 +69,8 @@ const sendFormHandler = async (e) => {
                     <form>
                         <button onClick={sendFormHandler}>Confirm</button>
                         <button onClick={(() => {setIsValid(!isValid)})}>Cancel</button>
-                        <input onChange={setTitleHandler}></input>
-                        <input onChange={setContentHandler}></input>
+                        <input type="text" onChange={setTitleHandler} placeholder={title}></input>
+                        <input type="text" onChange={setContentHandler} placeholder={content}></input>
                         
                     </form>
                     
@@ -86,8 +81,8 @@ const sendFormHandler = async (e) => {
                 <>
                     <button onClick={(() => {setIsValid(!isValid)})}>Edit</button>
                     <button onClick={deletePost}>Delete</button>
-                    <input disabled value={title}></input>
-                    <input disabled value={content}></input>
+                    <input type="text" disabled placeholder={title}></input>
+                    <input type="text" disabled placeholder={content}></input>
                 </>
             )}
             </div>
@@ -95,4 +90,5 @@ const sendFormHandler = async (e) => {
         </>
     )
 }
+
 export default singlePost

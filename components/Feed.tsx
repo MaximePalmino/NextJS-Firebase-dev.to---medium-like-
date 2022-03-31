@@ -3,41 +3,20 @@ import { useEffect, useState } from "react";
 import { auth, firestore } from "../lib/firebase";
 
 
-const Feed: React.FC = () => {
-
-    const [users, setUsers] = useState([])
+const Feed: React.FC<any> = ({title, content}: any) => {
 
 
-    const getAllUsers = async () => {
-        const querySnapshot = await getDocs(collection(firestore, "users"));
-        const allUsers = []
-        querySnapshot.forEach((doc) => {
-
-            allUsers.push({
-                id: doc.id
-            })
-        
-
-        })
-        setUsers(allUsers)
-        console.log(users)
-    }
-
-    const getAllPosts = async () => {
-        getAllUsers()
-        const getAllPosts = doc(firestore, "users", users[0], "posts")
-    }
-
-    useEffect(() => {
-
-        getAllUsers()
-    
-    }, [])
 
     return(
         <>
-        <h1>Hello from posts</h1>
-        </>
+            <div className="box-center">
+                <div className="card">
+                    <h1>{title.title}</h1>
+                    <p>{content.content}</p>
+                    <button>See the post</button>
+                </div>
+            </div>       
+         </>
     )
 }
 

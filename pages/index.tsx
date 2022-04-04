@@ -12,44 +12,38 @@ interface Posts {
 const Home: React.FC = () => {
 
   const [posts, setPosts] = useState<Posts[]>([])
-
+  console.log(posts)
   const getAllUsers = async () => {
 
       const querySnapshot = await getDocs(collection(firestore, "users"));
       const getAllPosts = []
-
       querySnapshot.forEach(async(doc) => {
 
-          const getPosts = await getDocs(collection(firestore, 'users', doc.id, 'posts'))
+      const getPosts = await getDocs(collection(firestore, 'users', doc.id, 'posts'))
 
-          getPosts.forEach((posts) => {
-
-              getAllPosts.push({
-                  title: posts.data().title,
-                  content: posts.data().content
-              })
-
+      getPosts.forEach((posts) => {
+          getAllPosts.push({
+              title: posts.data().title,
+              content: posts.data().content
           })
-
-          setPosts(getAllPosts)
-
       })
-      console.log(posts)
 
-
+      setPosts([...getAllPosts])
+    })
   }
 
   useEffect(() => {
-    setTimeout(() => {
+
       getAllUsers()
-    },1000)
+    
   }, [])
   
 
   return (
     <div>
       {posts.map((post) => {
-        <Feed title={post.title} content={post.content} />
+        console.log(post)
+        return <Feed title={post.title} content={post.content} />
       })}
     </div>
   )

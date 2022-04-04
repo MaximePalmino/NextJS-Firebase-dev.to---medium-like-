@@ -25,12 +25,9 @@ const UserProfilPage : React.FC = () => {
         }
 
     useEffect(() => {
-
-        setTimeout(() => {
+        if(auth && auth.currentUser)
             getAllUserPosts()
-        }, 600)
-
-    }, [])
+    }, [auth.currentUser])
 
 
 

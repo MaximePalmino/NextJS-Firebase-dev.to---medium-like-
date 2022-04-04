@@ -9,6 +9,7 @@ interface PropsFeeds {
 const Feed: React.FC<PropsFeeds> = ({title, content}) => {
 
 
+    console.log('from feed')
 
     return(
         <>

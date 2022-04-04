@@ -4,21 +4,24 @@ import { Timestamp, query, where, orderBy, limit, collectionGroup, getDocs, star
 
 import { useState, useEffect } from 'react';
 
+interface Posts {
+  title: string,
+  content: string
+}
 
+const Home: React.FC = () => {
 
-
-
-const Home: React.FC<any> = (props) => {
-
-  const [users, setUsers] = useState([])
-  const [posts, setPosts] = useState([])
-
+  const [posts, setPosts] = useState<Posts[]>([])
 
   const getAllUsers = async () => {
+
       const querySnapshot = await getDocs(collection(firestore, "users"));
       const getAllPosts = []
+
       querySnapshot.forEach(async(doc) => {
+
           const getPosts = await getDocs(collection(firestore, 'users', doc.id, 'posts'))
+
           getPosts.forEach((posts) => {
 
               getAllPosts.push({
@@ -27,28 +30,26 @@ const Home: React.FC<any> = (props) => {
               })
 
           })
+
           setPosts(getAllPosts)
 
       })
-      
       console.log(posts)
+
 
   }
 
   useEffect(() => {
-setTimeout(() => {
-  getAllUsers()
-},1000)
-
-  
+    setTimeout(() => {
+      getAllUsers()
+    },1000)
   }, [])
   
+
   return (
     <div>
-      {/* {props.title} */}
-      {/* {posts[0].title} */}
-      {posts.map((doc) => {
-        <Feed title={doc} content={doc} />
+      {posts.map((post) => {
+        <Feed title={post.title} content={post.content} />
       })}
     </div>
   )
